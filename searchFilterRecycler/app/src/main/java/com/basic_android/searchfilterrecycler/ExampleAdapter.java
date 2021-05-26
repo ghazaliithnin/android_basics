@@ -4,9 +4,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import android.widget.Toast;
 
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>
 {
@@ -14,11 +16,23 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public static class ExampleViewHolder extends RecyclerView.ViewHolder
     {
         public TextView mTextView1;
+        //public EditText mEditText2nd;
 
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
             mTextView1 = itemView.findViewById(R.id.textView);
+            TextView tv1 = mTextView1;
+            //mEditText2nd = itemView.findViewById(R.id.edittext);
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    System.out.println("yeet "+ tv1.getText().toString());
+                    Toast.makeText(view.getContext(),"yeet "+ tv1.getText().toString() + " uhu",Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }
@@ -39,6 +53,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     {
         ExampleItem currentItem = mExampleList.get(position);
         holder.mTextView1.setText(currentItem.getText1());
+        //holder.mEditText2nd.getText().toString(); # tak jadi
 
     }
     @Override
