@@ -7,34 +7,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ExampleItem> mExampleList;
-    //private RecyclerView mRecyclerView;
-    static RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    static MainActivity mMainActivity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createExampleList();
-
         buildRecyclerView();
-
         EditText editText = findViewById(R.id.edittext);
 
-        //RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRecyclerView.getLayoutParams();
-        //params.addRule(RelativeLayout.BELOW, R.id.wew_text);
 
         // #################################################
         // ##
@@ -45,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 mRecyclerView.setVisibility(View.VISIBLE);
-                params.addRule(RelativeLayout.BELOW, R.id.edittext);
-
                 //filter(s.toString());
                 //#########################
                 //#############
@@ -70,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-        // #################
-
-
-
+        // ##################
     }
     private void filter(String text) {
         ArrayList<ExampleItem> filteredList = new ArrayList<>();
@@ -84,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
         mAdapter.filterList(filteredList);
     }
-    private void createExampleList()
-    {
+    private void createExampleList() {
         mExampleList = new ArrayList<>();
         mExampleList.add(new ExampleItem( "One"));
         mExampleList.add(new ExampleItem("Two"));
@@ -101,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        //mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new ExampleAdapter(mExampleList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

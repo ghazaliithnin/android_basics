@@ -13,7 +13,6 @@ import android.widget.Toast;
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>
 {
     private ArrayList<ExampleItem> mExampleList;
-
     public static class ExampleViewHolder extends RecyclerView.ViewHolder
     {
         public TextView mTextView1;
@@ -32,7 +31,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                 {
                     System.out.println("yeet "+ tv1.getText().toString());
                     Toast.makeText(view.getContext(),"yeet "+ tv1.getText().toString() + " uhu",Toast.LENGTH_SHORT).show();
-                    MainActivity.mMainActivity.mRecyclerView.setVisibility(View.INVISIBLE);
                 }
             });
 
