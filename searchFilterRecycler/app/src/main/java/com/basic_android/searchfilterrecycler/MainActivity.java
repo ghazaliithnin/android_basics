@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ExampleItem> mExampleList;
     //private RecyclerView mRecyclerView;
     static RecyclerView mRecyclerView;
+    static EditText mEditText;
+    static TextView mTextView2;
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     static MainActivity mMainActivity;
@@ -26,52 +28,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createExampleList();
-
         buildRecyclerView();
 
-        EditText editText = findViewById(R.id.edittext);
+        mEditText = findViewById(R.id.edittext);
+        mTextView2 = findViewById(R.id.textView2);
 
-        //RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-
+        // Initizialization to to change the mRecyclerView position to be below edittext
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRecyclerView.getLayoutParams();
-        //params.addRule(RelativeLayout.BELOW, R.id.wew_text);
 
         // #################################################
         // ##
         mRecyclerView.setVisibility(View.INVISIBLE);
-        editText.setOnClickListener(new View.OnClickListener()
+
+        // Upon pressing textView2, start the search filter function
+        // The textView2 will be replaced by edittext by changing both setVisibility
+        mTextView2.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v)
+            public  void onClick(View v)
             {
-                mRecyclerView.setVisibility(View.VISIBLE);
-                params.addRule(RelativeLayout.BELOW, R.id.edittext);
+                mEditText.setVisibility(View.VISIBLE);
+                mTextView2.setVisibility(View.INVISIBLE);
 
-                //filter(s.toString());
-                //#########################
-                //#############
-                editText.addTextChangedListener(new TextWatcher()
-                {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after)
-                    {
-                    }
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    }
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        //mRecyclerView.setVisibility(View.VISIBLE);
-                        filter(s.toString());
-                    }
-                });
-                //###############
+                mRecyclerView.setVisibility(View.VISIBLE); // try 31 may 21
+                // Change the recyclerView position to be below edittext
+                params.addRule(RelativeLayout.BELOW, R.id.edittext); // try 31 may 21
             }
-
-
         });
-        // #################
 
+
+        // #################################################################
+        // # edittext search filter
+        mEditText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+        //###############
 
 
     }

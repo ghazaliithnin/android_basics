@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">textChange</string>
+    <string name="input_text"></string>
+    <string name="result_text"></string>
+</resources>
