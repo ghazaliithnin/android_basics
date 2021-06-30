@@ -80,8 +80,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void filter(String text) {
         ArrayList<ExampleItem> filteredList = new ArrayList<>();
-        for (ExampleItem item : mExampleList) {
-            if (item.getText1().toLowerCase().contains(text.toLowerCase())) {
+        for (ExampleItem item : mExampleList)
+        {
+            if (item.getText1().toLowerCase().contains(text.toLowerCase()))
+            {
                 filteredList.add(item);
             }
         }
